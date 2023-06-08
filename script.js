@@ -60,7 +60,9 @@ const inputTransferAmount = document.querySelector('.form__input--amount');
 const inputLoanAmount = document.querySelector('.form__input--loan-amount');
 const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
-
+/////////////////////////////////////////////////
+/////////////////////////////////////////////////
+/////DISPLAY MOVEMENTS
 const displayMovements = function (movement) {
   containerMovements.innerHTML = '';
   movement.forEach(function (mov, i) {
@@ -78,6 +80,28 @@ const displayMovements = function (movement) {
   });
 };
 displayMovements(account1.movements);
+/////////////////////////////////////////////////
+/////////////////////////////////////////////////
+/////CREATE USERNAME
+function createUserName(accs) {
+  accs.forEach(function (params) {
+    params.username = params.owner
+      .toLowerCase()
+      .split(' ')
+      .map((name) => name[0])
+      .join('');
+  });
+}
+createUserName(accounts);
+/////////////////////////////////////////////////
+/////////////////////////////////////////////////
+/////CALCULATOR AND PRINT BALANCE
+function printBalance(params) {
+  const balance = params.reduce((acc, el) => acc + el, 0);
+  return (labelBalance.textContent = `${balance} €`);
+}
+printBalance(account1.movements);
+
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
