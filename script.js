@@ -82,6 +82,27 @@ const displayMovements = function (movement) {
 displayMovements(account1.movements);
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
+/////Tolal Money In
+
+function displaySummary(params) {
+  const moneyIn = params.filter((el) => el > 0).reduce((acc, el) => acc + el);
+  labelSumIn.textContent = `${moneyIn}€`;
+
+  const moneyOut = params.filter((el) => el < 0).reduce((acc, el) => acc + el);
+  labelSumOut.textContent = `${Math.abs(moneyOut)}€`;
+
+  const laiSuat = 1.2 / 100; // 1.2%
+  const interest = params
+    .filter((el) => el > 0)
+    .map((el) => el * laiSuat)
+    .filter((el) => el > 1)
+    .reduce((acc, el) => acc + el);
+  labelSumInterest.textContent = `${interest}€`;
+}
+
+displaySummary(account1.movements);
+/////////////////////////////////////////////////
+/////////////////////////////////////////////////
 /////CREATE USERNAME
 function createUserName(accs) {
   accs.forEach(function (params) {
