@@ -31,15 +31,10 @@ const account4 = {
 
 const accounts = [account1, account2, account3, account4];
 
-const user = 'Dao Khoa Nguyen';
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
-function createUserName(accs) {
-  accs.forEach(function (params) {
-    params.username = params.owner
-      .toLowerCase()
-      .split(' ')
-      .map((name) => name[0])
-      .join('');
-  });
-}
-createUserName(accounts);
+const firstWithdrawal = movements.find((el) => el < 0); //-400
+const account = accounts.find((el) => el.owner === 'Sarah Smith');
+
+// console.log(firstWithdrawal);
+// console.log(account);

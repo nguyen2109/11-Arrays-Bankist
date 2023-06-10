@@ -9,11 +9,11 @@
 
 // console.log(`----- FOREACH -----`);
 
-// movements.forEach(function (move, i, arr) {
-//   move > 0
-//     ? console.log(`STT : ${i + 1} + ${move} VND `)
-//     : console.log(`STT : ${i + 1} - ${Math.abs(move)} VND `);
-// });
+movements.forEach(function (move, i, arr) {
+  move > 0
+    ? console.log(`STT : ${i + 1} + ${move} VND `)
+    : console.log(`STT : ${i + 1} - ${Math.abs(move)} VND `);
+});
 
 // console.log(`----- FOREACH WITH MAP METHOD -----`);
 const currencies = new Map([
@@ -27,6 +27,7 @@ currencies.forEach(function (value, key, map) {
 });
 
 const a = new Set(['USD', 'EUR', 'GBP', 'USD']);
+
 a.forEach(function (value, _, map) {
   console.log(`${value} : ${value}`);
 });

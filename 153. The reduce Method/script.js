@@ -2,7 +2,7 @@
 
 const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
-// const balance = movements.reduce((acc, el) => acc + el, 0);
+const balance = movements.reduce((acc, el) => acc + el, 0);
 
 // let balance2 = 0;
 // for (const mov of movements) {
