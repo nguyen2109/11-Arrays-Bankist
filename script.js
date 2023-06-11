@@ -138,19 +138,38 @@ btnLogin.addEventListener('click', function (e) {
     //Display Movements
     displayMovements(currentAccount.movements);
     //Display Balance
-    printBalance(currentAccount.movements);
+    printBalance(currentAccount);
     //Display Summary
     displaySummary(currentAccount);
   }
-  console.log(currentAccount);
+});
+/////////////////////////////////////////////////
+/////////////////////////////////////////////////
+/////159. Implementing Transfers
+btnTransfer.addEventListener('click', function (e) {
+  e.preventDefault();
+  const amount = Number(inputTransferAmount.value);
+  const receiverAcc = accounts.find(
+    (acc) => acc.username === inputTransferTo.value,
+  );
+  if (
+    amount > 0 &&
+    amount <= currentAccount.balance &&
+    receiverAcc &&
+    receiverAcc?.username !== currentAccount.username
+  ) {
+    console.log('Hợp lệ để chuyển tiền');
+  } else {
+    console.log('Không hợp lệ');
+  }
 });
 
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 /////CALCULATOR AND PRINT BALANCE
 function printBalance(params) {
-  const balance = params.reduce((acc, el) => acc + el, 0);
-  return (labelBalance.textContent = `${balance} €`);
+  params.balance = params.movements.reduce((acc, el) => acc + el, 0);
+  return (labelBalance.textContent = `${params.balance} €`);
 }
 
 /////////////////////////////////////////////////
