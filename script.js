@@ -117,7 +117,17 @@ function createUserName(accs) {
   });
 }
 createUserName(accounts);
-
+/////////////////////////////////////////////////
+/////////////////////////////////////////////////
+/////Func UpdateUI
+function updateUI(acc) {
+  //Display Movements
+  displayMovements(acc.movements);
+  //Display Balance
+  printBalance(acc);
+  //Display Summary
+  displaySummary(acc);
+}
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 /////158. Implementing Login
@@ -135,12 +145,7 @@ btnLogin.addEventListener('click', function (e) {
     //Display UI
     containerApp.style.opacity = 100;
 
-    //Display Movements
-    displayMovements(currentAccount.movements);
-    //Display Balance
-    printBalance(currentAccount);
-    //Display Summary
-    displaySummary(currentAccount);
+    updateUI(currentAccount);
   }
 });
 /////////////////////////////////////////////////
@@ -152,13 +157,18 @@ btnTransfer.addEventListener('click', function (e) {
   const receiverAcc = accounts.find(
     (acc) => acc.username === inputTransferTo.value,
   );
+  inputTransferAmount.value = inputTransferTo.value = '';
   if (
     amount > 0 &&
     amount <= currentAccount.balance &&
     receiverAcc &&
     receiverAcc?.username !== currentAccount.username
   ) {
-    console.log('Hợp lệ để chuyển tiền');
+    console.log('Đã chuyển tiền');
+    currentAccount.movements.push(-amount);
+    receiverAcc.movements.push(amount);
+
+    updateUI(currentAccount);
   } else {
     console.log('Không hợp lệ');
   }
