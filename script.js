@@ -174,6 +174,20 @@ btnTransfer.addEventListener('click', function (e) {
   }
 });
 
+btnClose.addEventListener('click', function (e) {
+  e.preventDefault();
+  const comfirmUser = inputCloseUsername.value;
+  const comfirmPIN = Number(inputClosePin.value);
+
+  if (
+    comfirmUser === currentAccount.username &&
+    comfirmPIN === currentAccount.pin
+  ) {
+    console.log('Xóa hợp lệ');
+  } else {
+    console.log('Delete error');
+  }
+});
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 /////CALCULATOR AND PRINT BALANCE
