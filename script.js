@@ -79,20 +79,24 @@ const displayMovements = function (movement) {
     containerMovements.insertAdjacentHTML('afterbegin', html);
   });
 };
-displayMovements(account1.movements);
+
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 /////Tolal Money In
 
 function displaySummary(params) {
-  const moneyIn = params.filter((el) => el > 0).reduce((acc, el) => acc + el);
+  const moneyIn = params.movements
+    .filter((el) => el > 0)
+    .reduce((acc, el) => acc + el);
   labelSumIn.textContent = `${moneyIn}€`;
 
-  const moneyOut = params.filter((el) => el < 0).reduce((acc, el) => acc + el);
+  const moneyOut = params.movements
+    .filter((el) => el < 0)
+    .reduce((acc, el) => acc + el);
   labelSumOut.textContent = `${Math.abs(moneyOut)}€`;
 
-  const laiSuat = 1.2 / 100; // 1.2%
-  const interest = params
+  const laiSuat = params.interestRate / 100; // 1.2%
+  const interest = params.movements
     .filter((el) => el > 0)
     .map((el) => el * laiSuat)
     .filter((el) => el > 1)
@@ -100,7 +104,6 @@ function displaySummary(params) {
   labelSumInterest.textContent = `${interest}€`;
 }
 
-displaySummary(account1.movements);
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 /////CREATE USERNAME
@@ -114,6 +117,34 @@ function createUserName(accs) {
   });
 }
 createUserName(accounts);
+
+/////////////////////////////////////////////////
+/////////////////////////////////////////////////
+/////158. Implementing Login
+let currentAccount;
+btnLogin.addEventListener('click', function (e) {
+  e.preventDefault();
+  currentAccount = accounts.find(
+    (acc) => acc.username === inputLoginUsername.value,
+  );
+  if (currentAccount?.pin === Number(inputLoginPin.value)) {
+    //Display Message
+    labelWelcome.textContent = `Xin chào ${
+      currentAccount.owner.split(' ')[0]
+    } ✅`;
+    //Display UI
+    containerApp.style.opacity = 100;
+
+    //Display Movements
+    displayMovements(currentAccount.movements);
+    //Display Balance
+    printBalance(currentAccount.movements);
+    //Display Summary
+    displaySummary(currentAccount);
+  }
+  console.log(currentAccount);
+});
+
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 /////CALCULATOR AND PRINT BALANCE
@@ -121,7 +152,6 @@ function printBalance(params) {
   const balance = params.reduce((acc, el) => acc + el, 0);
   return (labelBalance.textContent = `${balance} €`);
 }
-printBalance(account1.movements);
 
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
