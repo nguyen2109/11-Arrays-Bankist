@@ -173,6 +173,9 @@ btnTransfer.addEventListener('click', function (e) {
     console.log('Không hợp lệ');
   }
 });
+/////////////////////////////////////////////////
+/////////////////////////////////////////////////
+/////160. The findIndex Method
 
 btnClose.addEventListener('click', function (e) {
   e.preventDefault();
@@ -183,9 +186,30 @@ btnClose.addEventListener('click', function (e) {
     comfirmUser === currentAccount.username &&
     comfirmPIN === currentAccount.pin
   ) {
+    const index = accounts.findIndex(
+      (acc) => acc.username === currentAccount.username,
+    );
+    accounts.splice(index, 1);
+    containerApp.style.opacity = 0;
+
     console.log('Xóa hợp lệ');
   } else {
     console.log('Delete error');
+  }
+});
+/////////////////////////////////////////////////
+/////////////////////////////////////////////////
+/////161. some and every
+
+btnLoan.addEventListener('click', function (e) {
+  e.preventDefault();
+  const amount = Number(inputLoanAmount.value);
+  if (
+    amount > 0 &&
+    currentAccount.movements.some((mov) => mov >= amount * 0.1)
+  ) {
+    console.log(currentAccount.movements.push(amount));
+    updateUI(currentAccount);
   }
 });
 /////////////////////////////////////////////////
