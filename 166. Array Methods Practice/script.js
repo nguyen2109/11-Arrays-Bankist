@@ -57,12 +57,16 @@ const sums = accounts
   );
 console.log(sums);
 
+//4
+
 function title(params) {
+  const ex = ['a', 'an', 'is', 'nice'];
   console.log(
     params
       .toLowerCase()
       .split(' ')
-      .map((el) => el[0].toUpperCase() + el.slice(1)),
+      .map((el) => (ex.includes(el) ? el : el[0].toUpperCase() + el.slice(1)))
+      .join(' '),
   );
 }
-title('this is nice title');
+title('this is a nice title');
